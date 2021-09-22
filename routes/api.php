@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware([\App\Http\Middleware\ApiMiddleware::class])->group(function () {
+
+    Route::get('/ping', function () {
+        return response('pong');
+    });
+
+    Route::post('/auth', [\App\Http\Controllers\AuthController::class, 'login']);
+
 });
