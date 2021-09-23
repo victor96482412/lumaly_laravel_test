@@ -22,4 +22,12 @@ Route::middleware([\App\Http\Middleware\ApiMiddleware::class])->group(function (
 
     Route::post('/auth', [\App\Http\Controllers\AuthController::class, 'login']);
 
+    Route::middleware([\App\Http\Middleware\ApiAuthentication::class])->group(function () {
+        Route::get('/book/{name}',  [\App\Http\Controllers\BooksController::class, 'search']);
+        Route::post('/book',  [\App\Http\Controllers\BooksController::class, 'add']);
+    });
+
+    Route::any('*', function () {
+        return response('Undefined', 404);
+    });
 });
