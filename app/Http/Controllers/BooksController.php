@@ -16,7 +16,7 @@ class BooksController extends Controller
      */
     public function search(SearchBooksRequest $request, BooksService $booksService): Response
     {
-        $books = $booksService->searchForBooks($request->get('name'));
+        $books = $booksService->searchForBooks($request->route('name'));
         return response($books);
     }
 
